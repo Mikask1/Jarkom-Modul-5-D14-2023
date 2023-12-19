@@ -23,7 +23,7 @@
 
 
 
-# Routing 💅
+# Routing 
 
 - Aura ❄️
 
@@ -40,7 +40,7 @@ route add -net 192.198.14.148 netmask 255.255.255.252 gw 192.198.14.134
 ```
 
 
-- Frieren 👶
+- Frieren 
 ```
 route add -net 192.198.12.0 netmask 255.255.254.0 gw 192.198.14.142
 route add -net 192.198.14.0 netmask 255.255.255.252 gw 192.198.14.142
@@ -49,7 +49,7 @@ route add -net 192.198.14.148 netmask 255.255.255.252 gw 192.198.14.142
 ```
 
 
-- Himmel 👯‍♀️
+- Himmel 
 ```
 
 route add -net 192.198.14.144 netmask 255.255.255.252 gw 192.198.14.2
@@ -58,15 +58,15 @@ route add -net 192.198.14.148 netmask 255.255.255.252 gw 192.198.14.2
 ```
 
 
-# Konfig 🧔‍♂️
+# Konfig 
 
-Pada non-dhcp 🌶️
+Pada non-dhcp 
 ```
 echo 'nameserver 192.168.122.1' > /etc/resolv.conf
 ```
 
 
-- Ritcher 🌮 (DNS SERVER)
+- Ritcher  (DNS SERVER)
 
 ```
 apt-get update
@@ -89,7 +89,7 @@ service bind9 restart
 
 ```
 
-- Revolte 🤓 (DHCP Server)
+- Revolte (DHCP Server)
 ```
 apt-get update
 apt-get install isc-dhcp-server -y
@@ -163,7 +163,7 @@ service isc-dhcp-server restart
 ```
 
 
--  Heiter, Frieren, Himmel, Fern (DHCP Relay 👠)
+-  Heiter, Frieren, Himmel, Fern (DHCP Relay)
 ```
 apt-get update
 apt-get install isc-dhcp-relay -y
