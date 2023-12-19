@@ -10,12 +10,16 @@
 # Subnet Labelling
 
 <img src="images/gambar1.png">
+<br>
+
 # VLSM Tree
-img2
+<img src="images/yuwandisnat.png">
+<br>
 
 # Topology
+<img src="images/lol.png">
+<br>
 
-img3
 
 
 
