@@ -2,7 +2,7 @@
 
 ## Author
 - Darren Prasetya (5025211162)
-- Kamal (5025211)
+- Mohammad Kamal (5025211180)
 
 
 
