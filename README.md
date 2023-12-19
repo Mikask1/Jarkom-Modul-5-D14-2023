@@ -9,7 +9,7 @@
 
 # Subnet Labelling
 
-img1
+<img src="images/gambar1.png">
 # VLSM Tree
 img2
 
