@@ -226,6 +226,110 @@ iptables -I INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j
 iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 ```
 
+# Nomor 4, 5, 6
+### DHCP Server
+```
+host Jipangu {
+    hardware ethernet e2:5a:fc:14:47:5a;
+    fixed-address 192.198.8.3;
+}
+```
+
+### WebServer
+#### Firewall
+iptables -A INPUT -s 192.198.8.3 --match time --weekdays Mon,Tue,Wed,Thu,Fri --timestart 08:00 --timestop 16:00 -p tcp --dport 22 -j ACCEPT
+
+iptables -A INPUT -s 192.198.8.3 --match time --weekdays Mon,Tue,Wed,Thu --timestart 12:00 --timestop 13:00 -p tcp --dport 22 -j DROP
+
+iptables -A INPUT -s 192.198.8.3 --match time --weekdays Fri --timestart 11:00 --timestop 13:00 -p tcp --dport 22 -j DROP
+
+iptables -A INPUT -p tcp --dport 22 -j DROP
+
+#### Turn on SSH
+nano /etc/ssh/sshd_config
+PermitRootLogin yes
+
+service ssh restart
+
+#### Testing
+ssh root@192.198.8.2
+ssh root@192.198.14.138
+
+# Nomor 7
+### DHCP Relay
+```
+iptables -t nat -F
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 192.198.8.2 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.198.8.2:80
+iptables -A PREROUTING -t nat -p tcp --dport 80 -d 192.198.8.2 -j DNAT --to-destination 192.198.14.138:80
+```
+
+```
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 192.198.14.138 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.198.8.2:443
+iptables -A PREROUTING -t nat -p tcp --dport 443 -d 192.198.14.138 -j DNAT --to-destination 192.198.14.138:443
+```
+
+Show firewall rules
+```
+iptables -t nat -L -v
+```
+
+#### Testing
+WebServer & Client
+apt update
+apt install netcat -y
+
+##### Sein 80
+Sein
+```
+while true; do nc -l -p 80 -c 'echo "Sein"'; done
+```
+
+Stark
+```
+while true; do nc -l -p 80 -c 'echo "Stark"'; done
+```
+
+Client
+```
+nc 192.198.8.2 80
+```
+
+##### Stark 443
+Sein
+```
+while true; do nc -l -p 443 -c 'echo "Sein"'; done
+```
+
+Stark
+```
+while true; do nc -l -p 443 -c 'echo "Stark"'; done
+```
+
+Client
+```
+nc 192.198.14.138 443
+```
+
+# Nomor 8
+Revolte
+```
+iptables -A OUTPUT -s 192.198.14.148/30 -d 192.198.8.2 -j DROP
+iptables -A OUTPUT -s 192.198.14.148/30 -d 192.198.14.138 -j DROP
+```
+
+# Nomor 9
+WebServer
+```
+iptables -A INPUT -p tcp --dport 1:65535 -m state --state NEW -m recent --set --name PORTSCAN
+iptables -A INPUT -p tcp --dport 1:65535 -m state --state NEW -m recent --update --seconds 600 --hitcount 20 --rttl --name PORTSCAN -j DROP
+```
+#### Testing
+```
+nmap -p 1-1000 192.198.8.2
+nmap -p 1-1000 192.198.14.138
+```
+
+### Nomor 10
 
 
 
