@@ -228,6 +228,7 @@ iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 # Nomor 4, 5, 6
 ### DHCP Server
+
 ```
 host Jipangu {
     hardware ethernet e2:5a:fc:14:47:5a;
