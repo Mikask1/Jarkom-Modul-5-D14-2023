@@ -237,6 +237,7 @@ host Jipangu {
 
 ### WebServer
 #### Firewall
+```
 iptables -A INPUT -s 192.198.8.3 --match time --weekdays Mon,Tue,Wed,Thu,Fri --timestart 08:00 --timestop 16:00 -p tcp --dport 22 -j ACCEPT
 
 iptables -A INPUT -s 192.198.8.3 --match time --weekdays Mon,Tue,Wed,Thu --timestart 12:00 --timestop 13:00 -p tcp --dport 22 -j DROP
@@ -244,16 +245,23 @@ iptables -A INPUT -s 192.198.8.3 --match time --weekdays Mon,Tue,Wed,Thu --times
 iptables -A INPUT -s 192.198.8.3 --match time --weekdays Fri --timestart 11:00 --timestop 13:00 -p tcp --dport 22 -j DROP
 
 iptables -A INPUT -p tcp --dport 22 -j DROP
+```
 
 #### Turn on SSH
-nano /etc/ssh/sshd_config
+`nano /etc/ssh/sshd_config`
+```
 PermitRootLogin yes
+```
 
+```
 service ssh restart
+```
 
 #### Testing
+```
 ssh root@192.198.8.2
 ssh root@192.198.14.138
+```
 
 # Nomor 7
 ### DHCP Relay
@@ -275,8 +283,10 @@ iptables -t nat -L -v
 
 #### Testing
 WebServer & Client
+```
 apt update
 apt install netcat -y
+```
 
 ##### Sein 80
 Sein
@@ -329,7 +339,7 @@ nmap -p 1-1000 192.198.8.2
 nmap -p 1-1000 192.198.14.138
 ```
 
-### Nomor 10
+# Nomor 10
 
 
 
