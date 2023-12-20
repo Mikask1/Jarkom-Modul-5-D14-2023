@@ -221,9 +221,9 @@ Pada Revolte dan Ritcher  :
 
 
 ```
-iptables -A INPUT -p udp --dport 67 -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
+iptables -I INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
 
-iptables -A INPUT -p udp --dport 53 -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
+iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 ```
 
 
